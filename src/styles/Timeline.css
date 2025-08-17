@@ -4,6 +4,7 @@
   border: 1px solid #d1d5db;
   overflow: hidden;
   position: relative;
+  width: 100%;
 }
 
 .time-labels {
@@ -21,7 +22,6 @@
   font-weight: 500;
   top: 4px;
   transform: translateX(-50%);
-  transition: opacity 0.2s ease;
 }
 
 .time-text {

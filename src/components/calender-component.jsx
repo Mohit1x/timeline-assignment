@@ -30,7 +30,6 @@ const Calendar = ({ onDateSelect, onClose }) => {
 
   const handleDateClick = useCallback(
     (day) => {
-      // const date = new Date(currentYear, currentMonth, day);
       const formattedDate = `${String(currentMonth + 1).padStart(
         2,
         "0"

@@ -87,45 +87,57 @@ const Timeline = ({ fromDate, toDate }) => {
     if (!fromDate || !toDate) return [];
 
     const labels = [];
-    const scaledSegmentWidth = 4 * zoomLevel;
+    const scaledSegmentWidth = 1 * zoomLevel;
     const totalDays = getDateRange(new Date(fromDate), new Date(toDate));
 
     let intervalHours = 24;
-    if (zoomLevel >= 8) intervalHours = 1;
-    else if (zoomLevel >= 6) intervalHours = 3;
-    else if (zoomLevel >= 4) intervalHours = 6;
-    else if (zoomLevel >= 2) intervalHours = 12;
+    if (zoomLevel >= 1.5 && zoomLevel < 3) intervalHours = 6;
+    else if (zoomLevel >= 3 && zoomLevel < 5) intervalHours = 3;
+    else if (zoomLevel >= 5) intervalHours = 1;
 
     totalDays.forEach((date, dayIndex) => {
-      for (let hour = 0; hour < 24; hour += intervalHours) {
-        const segmentIndex = dayIndex * 288 + hour * 12;
+      if (intervalHours === 24) {
+        const segmentIndex = dayIndex * 288;
         const left = segmentIndex * scaledSegmentWidth + panOffset;
 
-        if (left > -150 && left < containerWidth + 150) {
-          let timeStr = "";
-          let dateStr = "";
-
-          if (intervalHours >= 24) {
-            dateStr = date.toLocaleDateString("en-US", {
+        if (left > -200 && left < containerWidth + 200) {
+          labels.push({
+            left,
+            time: "",
+            date: date.toLocaleDateString("en-US", {
               month: "short",
               day: "numeric",
               year: "numeric",
-            });
-          } else {
-            timeStr = `${String(hour).padStart(2, "0")}:00`;
+            }),
+            isDateMarker: true,
+          });
+        }
+      } else {
+        for (let hour = 0; hour < 24; hour += intervalHours) {
+          const segmentIndex = dayIndex * 288 + hour * 12;
+          const left = segmentIndex * scaledSegmentWidth + panOffset;
+
+          if (left > -200 && left < containerWidth + 200) {
             if (hour === 0) {
-              dateStr = date.toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
+              labels.push({
+                left,
+                time: "00:00",
+                date: date.toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                }),
+                isDateMarker: true,
+              });
+            } else {
+              labels.push({
+                left,
+                time: `${String(hour).padStart(2, "0")}:00`,
+                date: "",
+                isDateMarker: false,
               });
             }
           }
-
-          labels.push({
-            left,
-            time: timeStr,
-            date: dateStr,
-          });
         }
       }
     });
@@ -201,8 +213,10 @@ const Timeline = ({ fromDate, toDate }) => {
       <div className="time-labels">
         {timeLabels.map((label, index) => (
           <div
-            key={`${label.time}-${index}`}
-            className="time-label"
+            key={`${label.time}-${label.date}-${index}`}
+            className={`time-label ${
+              label.isDateMarker ? "date-marker" : "time-marker"
+            }`}
             style={{
               left: `${label.left}px`,
               opacity:
@@ -222,7 +236,14 @@ const Timeline = ({ fromDate, toDate }) => {
         onMouseDown={handleMouseDown}
         style={{ cursor: isDragging ? "grabbing" : "grab" }}
       >
-        <div className="timeline-track">
+        <div
+          className="timeline-track"
+          style={{
+            position: "relative",
+            width: `${baseTimelineData.length * (4 * zoomLevel)}px`,
+            height: "60px",
+          }}
+        >
           {visibleSegments.map((segment, index) => (
             <div
               key={index}
