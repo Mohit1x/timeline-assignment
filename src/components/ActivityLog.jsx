@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DatePicker from "../components/date-picker";
 import "../styles/activity-log.css";
+import Timeline from "./timeline-component";
 
 const ActivityLog = () => {
   const [fromDate, setFromDate] = useState("");
@@ -16,6 +17,7 @@ const ActivityLog = () => {
         onFromDateChange={setFromDate}
         onToDateChange={setToDate}
       />
+      <Timeline fromDate={fromDate} toDate={toDate} />
     </div>
   );
 };

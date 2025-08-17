@@ -1,6 +1,6 @@
-.app{
-display:flex;
-align-items: center;
-justify-content: center;
-min-height: 100vh;
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 100vh;
 }

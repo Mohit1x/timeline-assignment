@@ -1,0 +1,103 @@
+.timeline-container {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  overflow: hidden;
+  position: relative;
+}
+
+.time-labels {
+  position: relative;
+  height: 40px;
+  background: #fafafa;
+  border-bottom: 1px solid #e5e7eb;
+  overflow: hidden;
+}
+
+.time-label {
+  position: absolute;
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 500;
+  top: 4px;
+  transform: translateX(-50%);
+  transition: opacity 0.2s ease;
+}
+
+.time-text {
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.date-text {
+  font-size: 9px;
+  color: #9ca3af;
+}
+
+.timeline-track-container {
+  height: 80px;
+  overflow: hidden;
+  position: relative;
+  background: #ffffff;
+  user-select: none;
+}
+
+.timeline-track {
+  height: 100%;
+  position: relative;
+  padding: 10px 0;
+}
+
+.timeline-segment {
+  border-radius: 1px;
+  transition: none;
+}
+
+.zoom-cursor {
+  display: none;
+}
+
+.zoom-indicator {
+  padding: 8px 16px;
+  background: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.zoom-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.zoom-controls button {
+  background: #e5e7eb;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.zoom-controls button:hover {
+  background: #d1d5db;
+}
+
+.zoom-controls button.reset {
+  background: #3b82f6;
+  color: white;
+}
+
+.zoom-controls button.reset:hover {
+  background: #2563eb;
+}
+
+@media (max-width: 768px) {
+  .timeline-track-container {
+    height: 60px;
+  }
+}
