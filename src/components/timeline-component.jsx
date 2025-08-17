@@ -260,11 +260,6 @@ const Timeline = ({ fromDate, toDate }) => {
           ))}
         </div>
       </div>
-
-      <div className="zoom-indicator">
-        <span>Zoom: {zoomLevel.toFixed(1)}x</span>
-        <span>Scroll to zoom • Drag to pan</span>
-      </div>
     </div>
   );
 };

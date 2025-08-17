@@ -57,17 +57,6 @@
   display: none;
 }
 
-.zoom-indicator {
-  padding: 8px 16px;
-  background: #f9fafb;
-  border-top: 1px solid #e5e7eb;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 11px;
-  color: #6b7280;
-}
-
 .zoom-controls {
   display: flex;
   gap: 4px;
