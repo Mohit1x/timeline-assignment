@@ -14,7 +14,7 @@ const Timeline = ({ fromDate, toDate }) => {
   const [mousePosition, setMousePosition] = useState(0.5);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, offset: 0 });
-  const [containerWidth, setContainerWidth] = useState(1000);
+  const [containerWidth, setContainerWidth] = useState(1500);
 
   const timelineRef = useRef(null);
 
@@ -87,7 +87,7 @@ const Timeline = ({ fromDate, toDate }) => {
     if (!fromDate || !toDate) return [];
 
     const labels = [];
-    const scaledSegmentWidth = 1 * zoomLevel;
+    const scaledSegmentWidth = 4 * zoomLevel;
     const totalDays = getDateRange(new Date(fromDate), new Date(toDate));
 
     let intervalHours = 24;
