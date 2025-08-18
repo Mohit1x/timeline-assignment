@@ -1,17 +1,11 @@
-import React, {
-  useState,
-  useCallback,
-  useMemo,
-  useRef,
-  useEffect,
-} from "react";
+import { useState, useCallback, useMemo, useRef, useEffect } from "react";
 import "../styles/Timeline.css";
 import { getDateRange } from "../lib/utils";
 
 const Timeline = ({ fromDate, toDate }) => {
   const [zoomLevel, setZoomLevel] = useState(1);
   const [panOffset, setPanOffset] = useState(0);
-  const [mousePosition, setMousePosition] = useState(0.5);
+  const [mousePosition, setMousePosition] = useState(1);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, offset: 0 });
   const [containerWidth, setContainerWidth] = useState(1500);
@@ -163,7 +157,6 @@ const Timeline = ({ fromDate, toDate }) => {
 
   const handleWheel = useCallback(
     (e) => {
-      // no preventDefault here!
       const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
       const newZoomLevel = Math.max(0.5, Math.min(10, zoomLevel * zoomFactor));
 
