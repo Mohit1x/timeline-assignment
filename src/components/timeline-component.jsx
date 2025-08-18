@@ -163,8 +163,7 @@ const Timeline = ({ fromDate, toDate }) => {
 
   const handleWheel = useCallback(
     (e) => {
-      e.preventDefault();
-
+      // no preventDefault here!
       const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
       const newZoomLevel = Math.max(0.5, Math.min(10, zoomLevel * zoomFactor));
 
@@ -179,6 +178,19 @@ const Timeline = ({ fromDate, toDate }) => {
     },
     [zoomLevel, mousePosition, panOffset, containerWidth]
   );
+
+  useEffect(() => {
+    const el = timelineRef.current;
+    if (!el) return;
+
+    const wheelHandler = (e) => {
+      e.preventDefault();
+      handleWheel(e);
+    };
+
+    el.addEventListener("wheel", wheelHandler, { passive: false });
+    return () => el.removeEventListener("wheel", wheelHandler);
+  }, [handleWheel]);
 
   const handleMouseDown = useCallback(
     (e) => {
