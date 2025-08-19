@@ -31,7 +31,7 @@ const Timeline = ({ fromDate, toDate }) => {
 
     allDates.forEach((date, dayIndex) => {
       for (let hour = 0; hour < 24; hour++) {
-        for (let minute = 0; minute < 60; minute += 5) {
+        for (let minute = 0; minute < 60; minute += 30) {
           let intensity = 0.1 + Math.random() * 0.9;
           segments.push({
             intensity,
@@ -91,7 +91,7 @@ const Timeline = ({ fromDate, toDate }) => {
 
     totalDays.forEach((date, dayIndex) => {
       if (intervalHours === 24) {
-        const segmentIndex = dayIndex * 288;
+        const segmentIndex = dayIndex * 48;
         const left = segmentIndex * scaledSegmentWidth + panOffset;
 
         if (left > -200 && left < containerWidth + 200) {
@@ -108,7 +108,7 @@ const Timeline = ({ fromDate, toDate }) => {
         }
       } else {
         for (let hour = 0; hour < 24; hour += intervalHours) {
-          const segmentIndex = dayIndex * 288 + hour * 12;
+          const segmentIndex = dayIndex * 48 + hour * 2;
           const left = segmentIndex * scaledSegmentWidth + panOffset;
 
           if (left > -200 && left < containerWidth + 200) {

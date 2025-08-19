@@ -3,7 +3,7 @@ export const getDateRange = (start, end) => {
   const current = new Date(start);
 
   while (current <= end) {
-    dates.push(new Date(current)); // push a clone
+    dates.push(new Date(current));
     current.setDate(current.getDate() + 1);
   }
 
